@@ -1,0 +1,48 @@
+.country-search {
+  padding: 20px;
+}
+.country-search__input {
+  width: 400px;
+  padding: 10px;
+}
+.found-countries-list__item {
+  margin-bottom: 5px;
+  cursor: default;
+  &:hover {
+    color: orange;
+  }
+}
+.country-card__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.country-card__box-name {
+  font-size: 40px;
+  font-weight: 700;
+}
+.country-card__box-info {
+  display: flex;
+  justify-content: center;
+}
+.country-card__box-infotext {
+  margin-right: 30px;
+  font-size: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.country-card__box-capital {
+  margin: 0 0 20px 0;
+}
+.country-card__box-population {
+  margin: 0 0 20px 0;
+}
+.country-card__box-languages {
+  margin: 0;
+  padding: 0;
+}
+.country-card__box-languages-item {
+  margin: 10px 0 0 30px;
+}
