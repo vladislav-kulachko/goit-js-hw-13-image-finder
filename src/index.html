@@ -8,17 +8,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
     integrity="sha512-ISS7cAi1PEhQ8jnbJpJZMd29NlhNj4AWYyLOSp2CE/CsHxTCu+r+t0D2yoJudVrd0/8fTVPUVDzY5Tvli75u/g=="
     crossorigin="anonymous" />
+
 </head>
 
 <body>
   <form class="search-form" id="search-form">
     <input type="text" name="query" autocomplete="off" placeholder="Search images..." />
+    <button class="load-more-button" type="button">load more</button>
   </form>
 
   <ul class="gallery">
-    <!-- Список <li> с карточками изображений -->
-  </ul>
 
+  </ul>
+  <div id="anchor"></div>
   <script src="./index.js"></script>
 </body>
 

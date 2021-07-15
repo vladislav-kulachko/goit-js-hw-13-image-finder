@@ -3,10 +3,10 @@
   "version": "1.1.0",
   "description": "",
   "main": "index.js",
-  "homepage": "http://vladislav-kulachko.github.io/goit-js-hw-12-countries",
+  "homepage": "http://vladislav-kulachko.github.io/goit-js-hw-13-image-finder",
   "scripts": {
     "dev": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /goit-js-hw-12-countries/",
+    "build": "parcel build src/*.html --public-url /goit-js-hw-13-image-finder/",
     "deploy": "gh-pages -d dist",
     "predeploy": "npm run build"
   },
@@ -29,6 +29,7 @@
     "sass": "^1.32.8"
   },
   "dependencies": {
+    "basiclightbox": "^5.0.4",
     "lodash.debounce": "^4.0.8",
     "material-design-icons": "^3.0.1",
     "material-icons": "^0.7.6"
