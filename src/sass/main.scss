@@ -1,9 +1,8 @@
 @import './basicLightbox.min.css';
-
+@import 'material-icons/iconfont/material-icons.css';
 body {
   margin: 0 auto;
   min-height: 100%;
-
   //   width: 1200px;
 }
 
@@ -22,20 +21,20 @@ img {
   margin: -10px;
 }
 .gallery__item {
-  margin: 10px;
+  margin: 15px;
   width: calc((100% - 120px) / 3);
 }
 .photo-card {
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
-  border-radius: 0px 0px 4px 4px;
+  border-radius: 4px;
   transform: scale(1);
   transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
     transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover,
   &:focus {
-    transform: scale(1.1);
+    transform: scale(1.15);
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
       1px 4px 6px rgba(0, 0, 0, 0.16);
   }
@@ -55,29 +54,52 @@ img {
   flex-direction: column;
 }
 .search-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 2;
   position: sticky;
-  padding: 20px 0 20px 500px;
+  padding: 20px 0 20px 0;
   margin: 0;
   top: 0px;
-  background-color: rgba(200, 255, 150, 0.8);
+  background-color: rgba(200, 255, 150, 0.9);
 }
 .material-icons {
   color: green;
 }
-input {
+.input {
+  margin-right: 10px;
+  outline: none;
+  width: 300px;
   border-radius: 4px;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
-  border: 1px solid whitesmoke;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border: none;
   padding: 10px;
+
+  &:hover,
+  &:focus {
+    box-shadow: inset 1px 1px 3px 0px rgba(0, 0, 0, 0.6);
+  }
 }
 .load-more-button {
-  background-color: orange;
+  background-color: greenyellow;
+  transform: scale(1);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   padding: 10px;
   border-radius: 4px;
-  border: 1px solid whitesmoke;
+  border: none;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+
   &:hover {
-    background-color: greenyellow;
+    transform: scale(1.15);
+    background-color: green;
+    color: honeydew;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
+      1px 4px 6px rgba(0, 0, 0, 0.16);
   }
 }

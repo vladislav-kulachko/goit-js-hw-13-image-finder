@@ -1,5 +1,5 @@
 import createImgCard from '../templates/img-card.hbs';
-// import imgApiService from '../js/api-service.js';
+import ApiService from '/js/api-service.js';
 import debounce from 'lodash.debounce';
 import { alert, error, info, defaults, Stack } from '@pnotify/core';
 import '@pnotify/core/dist/Material.css';
@@ -8,14 +8,14 @@ import 'material-design-icons/iconfont/material-icons.css';
 defaults.styling = 'material';
 defaults.icons = 'material';
 defaults.width = '300px';
-defaults.delay = '3000';
+defaults.delay = '4000';
 import * as basicLightbox from 'basiclightbox';
 
 const myStack = new Stack({
   dir1: 'down',
   dir2: 'right',
-  firstpos1: 50,
-  firstpos2: 500,
+  firstpos1: 5,
+  firstpos2: 1000,
   push: 'bottom',
   context: document.body,
 });
@@ -28,7 +28,7 @@ loadMoreBtn.addEventListener('click', onLoadMore);
 findInput.addEventListener('input', debounce(inputHandler, 1000));
 galleryContainer.addEventListener('click', imgClickHandler);
 
-// const imgApiService = new apiService();
+const imgApiService = new ApiService();
 
 const observer = new IntersectionObserver(onLoadMoreScroll, {
   threshold: 0,
@@ -36,102 +36,94 @@ const observer = new IntersectionObserver(onLoadMoreScroll, {
 
 observer.observe(anchor);
 
-async function fetchImg(query) {
-  const API_KEY = '22469434-62330606312f34e078b383df4';
-  const URL = `https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${query}&page=${page}&per_page=12&key=${API_KEY} `;
-
-  const res = await fetch(URL);
-  page += 1;
-  return await res.json();
-}
-
-let page = 1;
-let query;
 loadMoreBtn.style.display = 'none';
 
-function inputHandler(e) {
-  query = e.target.value;
-
-  page = 1;
-
-  if (query === '') {
-    galleryContainer.innerHTML = '';
-    loadMoreBtn.style.display = 'none';
-  }
-
-  // imgApiService.query = e.target.value;
-  // imgApiService.clearRes();
-
-  if (query) {
-    fetchImg(query)
-      .then(images => {
-        galleryContainer.innerHTML = '';
-        parseMarkup(images);
-        return images;
-      })
-      .then(images => {
-        if (images.hits.length === 0) {
-          alert({
-            text: 'Photo not found!',
-            stack: myStack,
-          });
-        }
-      })
-      .then(() => {
-        if (galleryContainer.children.length >= 12) {
-          loadMoreBtn.style.display = 'inline-block';
-        }
-        if (galleryContainer.children.length < 12) {
-          loadMoreBtn.style.display = 'none';
-        }
-      });
-  }
-}
+let query;
 
 function parseMarkup(images) {
   galleryContainer.insertAdjacentHTML('beforeend', createImgCard(images));
 }
 
+function inputHandler(e) {
+  query = e.target.value;
+  imgApiService.clearRes();
+  if (query === '') {
+    galleryContainer.innerHTML = '';
+    loadMoreBtn.style.display = 'none';
+  }
+
+  imgApiService.currentQuery = query;
+
+  if (query) {
+    (async () => {
+      const images = await imgApiService.fetchImg();
+      galleryContainer.innerHTML = '';
+      parseMarkup(images);
+      if (images.length === 0) {
+        error({
+          text: 'Photo not found!',
+          stack: myStack,
+        });
+      }
+      if (images.length === 12) {
+        loadMoreBtn.style.display = 'block';
+      }
+      if (images.length < 12) {
+        loadMoreBtn.style.display = 'none';
+      }
+    })();
+  }
+}
+
 function onLoadMore() {
   if (query) {
-    fetchImg(query)
-      .then(images => {
-        parseMarkup(images);
-        return images.hits[images.hits.length - 4].id;
-      })
-      .then(id => {
-        const element = document.getElementById(`${id}`);
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'end',
-        });
+    (async () => {
+      let images = await imgApiService.fetchImg();
+      parseMarkup(images);
+      const id = await images[images.length - 4].id;
+      const element = document.getElementById(`${id}`);
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
       });
+      if (images.length < 12) {
+        loadMoreBtn.style.display = 'none';
+        alert({
+          text: 'No more photos were found for this request!',
+          stack: myStack,
+        });
+      }
+    })();
   }
 }
 
 function onLoadMoreScroll([entry]) {
   if (!entry.isIntersecting) return;
   if (query) {
-    fetchImg(query)
-      .then(images => {
-        parseMarkup(images);
-        return images.hits[images.hits.length - 1].id;
-      })
-      .then(id => {
-        const element = document.getElementById(`${id}`);
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'end',
-        });
+    (async () => {
+      let images = await imgApiService.fetchImg();
+      parseMarkup(images);
+      const id = images[images.length - 1].id;
+      const element = document.getElementById(`${id}`);
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
       });
+      if (images.length < 12) {
+        loadMoreBtn.style.display = 'none';
+        alert({
+          text: 'No more photos were found for this request!',
+          stack: myStack,
+        });
+      }
+    })();
   }
 }
 
 function imgClickHandler(e) {
   if (e.target.dataset.source) {
-    const largeImage = e.target.dataset.source;
-    const lightbox = basicLightbox.create(`<img src="${largeImage}">`);
-
+    const fulImage = e.target.dataset.source;
+    const lightbox = basicLightbox.create(`<img src="${fulImage}">`);
     lightbox.show();
   }
 }

@@ -1,4 +1,4 @@
-export default class apiService {
+export default class ApiService {
   constructor() {
     this.page = 1;
     this.query = '';
@@ -6,9 +6,10 @@ export default class apiService {
   async fetchImg() {
     const API_KEY = '22469434-62330606312f34e078b383df4';
     const URL = `https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${this.query}&page=${this.page}&per_page=12&key=${API_KEY} `;
-    updPage();
+    this.updPage();
     const res = await fetch(URL);
-    return await res.json();
+    const obj = await res.json();
+    return await obj.hits;
   }
   clearRes() {
     this.page = 1;
@@ -17,10 +18,10 @@ export default class apiService {
     this.page += 1;
   }
 
-  set query(newQuery) {
+  set currentQuery(newQuery) {
     this.query = newQuery;
   }
-  get query() {
+  get currentQuery() {
     return this.query;
   }
 }
