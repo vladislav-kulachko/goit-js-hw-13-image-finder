@@ -2,7 +2,7 @@
 @import 'material-icons/iconfont/material-icons.css';
 
 .container {
-  width: 1600px;
+  width: auto;
   margin: 0 auto;
 }
 img {
@@ -18,10 +18,10 @@ img {
   justify-content: center;
   align-content: flex-start;
   list-style: none;
-  margin: -10px;
+  margin: -15px;
 }
 .gallery__item {
-  margin: 10px;
+  margin: 15px;
   width: calc((100% - 120px) / 4);
 }
 .photo-card {
