@@ -7,7 +7,7 @@ import '@pnotify/core/dist/PNotify.css';
 import 'material-design-icons/iconfont/material-icons.css';
 defaults.styling = 'material';
 defaults.icons = 'material';
-defaults.width = '300px';
+defaults.width = '500px';
 defaults.delay = '4000';
 import * as basicLightbox from 'basiclightbox';
 
