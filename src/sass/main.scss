@@ -1,11 +1,10 @@
 @import './basicLightbox.min.css';
 @import 'material-icons/iconfont/material-icons.css';
-body {
-  margin: 0 auto;
-  min-height: 100%;
-  //   width: 1200px;
-}
 
+.container {
+  width: 1200px;
+  margin: 0 auto;
+}
 img {
   display: block;
   width: 100%;
@@ -13,6 +12,7 @@ img {
   object-fit: cover;
 }
 .gallery {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -21,8 +21,8 @@ img {
   margin: -10px;
 }
 .gallery__item {
-  margin: 15px;
-  width: calc((100% - 120px) / 3);
+  margin: 10px;
+  width: calc((100% - 120px) / 4);
 }
 .photo-card {
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
@@ -40,7 +40,7 @@ img {
   }
 }
 .img-container {
-  height: 200px;
+  height: 150px;
 }
 
 .stats {
@@ -68,9 +68,10 @@ img {
   color: green;
 }
 .input {
-  margin-right: 10px;
+  font-size: 26px;
+  margin-right: 20px;
   outline: none;
-  width: 300px;
+  width: 400px;
   border-radius: 4px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
@@ -83,6 +84,7 @@ img {
   }
 }
 .load-more-button {
+  font-size: 26px;
   background-color: greenyellow;
   transform: scale(1);
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
