@@ -2872,7 +2872,7 @@ const myStack = new _core.Stack({
   dir1: 'down',
   dir2: 'right',
   firstpos1: 5,
-  firstpos2: 1000,
+  firstpos2: 5,
   push: 'bottom',
   context: document.body
 });
